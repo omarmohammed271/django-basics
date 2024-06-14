@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .post-item {
+        background: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    form {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Posts</h1>
+    <div class="post-list">
+        {% for blog in blogs  %}
+        <div class="post-item">
+            <h4>{{blog.title}}</h4>
+            <p>{{blog.post}}</p>
+            <p><strong>Posted by: {{blog.owner}}</strong></p>
+            <p><strong>Published at: {{blog.created_at}}</strong></p>
+        </div>
+        {% endfor %}
+        
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="post-content">Create a new post:</label><br>
+        <textarea id="post-content" name="content" rows="4" cols="50"></textarea><br>
+        <label for="post-author">Your name:</label><br>
+        <input type="text" id="post-author" name="author"><br>
+        <label for="post-author">Post Title:</label><br>
+        <input type="text" id="post-author" name="title"><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
